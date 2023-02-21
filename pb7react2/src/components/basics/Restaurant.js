@@ -17,7 +17,19 @@ import MenuCard from './MenuCard.js';
 
 
   return (
-    <>
+    <div>
+    <nav className="navbar">
+        <div className="btn-group">   
+        <button className="btn-group__item">Breakfast</button>
+        <button className="btn-group__item">Lunch</button>
+        <button className="btn-group__item">Evening</button>
+        <button className="btn-group__item">Dinner</button>
+        <button className="btn-group__item">ALL</button>
+
+        </div>
+
+
+    </nav>
      
     <MenuCard menuData={menuData} />
     {/* eibar menucard.js file e jehetu ekbar component ta banano ache
@@ -26,9 +38,9 @@ import MenuCard from './MenuCard.js';
     amra props use korbo i.e. prothome menuapi.js theke data ta menuData te store hobe
     eibar amra menudata take props hisabe share korbo menucard.js e
     tarpor map fn use kore loop kore debo jate automatically data ta show hoye browser e
-    
+
       */}
-    </>
+    </div>
    
 
     
