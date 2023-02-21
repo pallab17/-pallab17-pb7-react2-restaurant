@@ -1,55 +1,43 @@
-import React,{useState} from 'react';
+import React, { useState } from "react";
 import "./style.css";
-import Menu from "./menuApi";
-import MenuCard from './MenuCard.js';
+import Menu from "./menuApi.js";
+import MenuCard from "./MenuCard";
+import Navbar from "./Navbar";
 
+const uniqueList = [
+  ...new Set(
+    Menu.map((curElem) => {
+      return curElem.category;
+    })
+  ),
+  "All",
+];
 
+console.log(uniqueList);
 
- const Restaurant = () => {
-    const [menuData,setMenuData] = useState(Menu); 
-   /*  usestate(menu) = usestate data manage kore 
-    menuapi.js theke data ta ese store hocche Menu bole use usestate e
-    usestate 2 to element pass kore array r form e
-    first element ta current state 
-    2nd element ta hooche updated/future state */
+const Resturant = () => {
+  const [menuData, setMenuData] = useState(Menu);
+  const [menuList, setMenuList] = useState(uniqueList);
 
-    console.log(menuData);
+  const filterItem = (category) => {
+    if (category === "All") {
+      setMenuData(Menu);
+      return;
+    }
 
+    const updatedList = Menu.filter((curElem) => {
+      return curElem.category === category;
+    });
+
+    setMenuData(updatedList);
+  };
 
   return (
-    <div>
-    <nav className="navbar">
-        <div className="btn-group">   
-        <button className="btn-group__item">Breakfast</button>
-        <button className="btn-group__item">Lunch</button>
-        <button className="btn-group__item">Evening</button>
-        <button className="btn-group__item">Dinner</button>
-        <button className="btn-group__item">ALL</button>
+    <>
+      <Navbar filterItem={filterItem} menuList={menuList} />
+      <MenuCard menuData={menuData} />
+    </>
+  );
+};
 
-        </div>
-
-
-    </nav>
-     
-    <MenuCard menuData={menuData} />
-    {/* eibar menucard.js file e jehetu ekbar component ta banano ache
-    10 bar use korar jonno 10 bar copy paste na korleo hobe
-    jate 10 bar na use korte hoye 
-    amra props use korbo i.e. prothome menuapi.js theke data ta menuData te store hobe
-    eibar amra menudata take props hisabe share korbo menucard.js e
-    tarpor map fn use kore loop kore debo jate automatically data ta show hoye browser e
-
-      */}
-    </div>
-   
-
-    
-   
-  )
-}
-
-export default Restaurant;
-
-
-
-    
+export default Resturant;
